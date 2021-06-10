@@ -1,0 +1,72 @@
+<template>
+    <lightning-card>
+        <h3 slot="title">
+            <lightning-icon icon-name="standard:event" size="small" class="slds-m-right_small"></lightning-icon>
+            Meetups Registration
+        </h3>
+        
+        <p class="slds-p-horizontal_small">
+            <template if:false={showForm}>
+                <template if:false={error}>
+                    <lightning-input 
+                        type="text" 
+                        label="Registration Code" 
+                        placeholder="Please type in the correct code here..." 
+                        max-length = "8"
+                        min-length = "8"
+                        message-when-too-short ="Registration Code can't be shorter than 8 characters"
+                        required 
+                        onchange={handleRegistrationCodeChanges}
+                    ></lightning-input>
+                    <lightning-button
+                        variant="brand"
+                        label="Validate Code"
+                        title="Validate Code"
+                        onclick={handleCodeValidation}>
+                    </lightning-button>
+                </template>
+                
+                <template if:true={error}>
+                    Can't find the Meetup with provided registration code. Please click   
+                    <lightning-button
+                        class="slds-m-horizontal_xx-small"
+                        variant="base"
+                        label="here"
+                        title="here"
+                        onclick={handlePrevious}>
+                    </lightning-button>
+                    to return.
+                </template>
+            </template>
+            <template if:true={showForm}>
+                <lightning-input 
+                    type="text" 
+                    label="First Name" 
+                    placeholder="Please type your first name here..." 
+                    required 
+                    onchange={handleFirstNameChanges}
+                ></lightning-input>
+                <lightning-input 
+                    type="text" 
+                    label="Last Name" 
+                    placeholder="Please type your last name here..." 
+                    required 
+                    onchange={handleLastNameChanges}
+                ></lightning-input>
+                <lightning-input 
+                    type="email" 
+                    label="Email Address" 
+                    placeholder="Please type your email address here..." 
+                    required
+                    onchange={handleEmailChanges}
+                ></lightning-input>
+                <lightning-button
+                    variant="brand" 
+                    label="Register" 
+                    title="Register" 
+                    onclick={handleRegister} 
+                ></lightning-button>
+            </template>
+        </p>
+    </lightning-card>
+</template>
